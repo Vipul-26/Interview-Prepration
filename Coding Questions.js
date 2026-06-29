@@ -142,6 +142,16 @@ function customHook(inputArray) {
   return highestSalaryObject;
 }
 
+// Reduce Version
+
+function customHook(inputArray) {
+  const maxSalaryObj = inputArray.reduce((max, item) =>{
+    return item.salary > max ? item : max
+  }, inputArray[0].salary);
+
+  return maxSalaryObj;
+}
+
 // Sum of Salary (const emp = [{ salary: 1000 },{ salary: 5000 },{ salary: 3000 }];)
 
 function customHook(inputArray) {
