@@ -334,6 +334,19 @@ var twoSum = function (nums, target) {
   return index;
 };
 
+// Using Map (key: value pair) (stores all types of key unlike object that just stores string as key)
+
+var twoSum = function (nums, target) {
+    let map = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        let value = target - nums[i];
+        if(map.has(value)){
+            return [map.get(value) , i]
+        }
+        map.set(nums[i], i)
+    }
+};
+
 // Debounce debounce(fn,500)
 
 function debounce(func, delay) {
