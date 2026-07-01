@@ -157,8 +157,8 @@ function customHook(inputArray) {
 
 function customHook(inputArray) {
   const maxSalaryObj = inputArray.reduce((max, item) => {
-    return item.salary > max ? item : max;
-  }, inputArray[0].salary);
+    return item.salary > max.salary ? item : max;
+  }, inputArray[0]);
 
   return maxSalaryObj;
 }
@@ -199,12 +199,10 @@ function customHook(inputArray) {
   return flattenArray(inputArray);
 }
 
-// Chunk Array ([1, 2, 3, 4, 5, 6])
-
 // Reverse Words ('I love react')
 
 function customHook(str) {
-  return str.spit(" ").reverse().join(" ");
+  return str.split(" ").reverse().join(" ");
 }
 
 // Longest word ("I love JavaScript very much")
@@ -337,14 +335,14 @@ var twoSum = function (nums, target) {
 // Using Map (key: value pair) (stores all types of key unlike object that just stores string as key)
 
 var twoSum = function (nums, target) {
-    let map = new Map();
-    for (let i = 0; i < nums.length; i++) {
-        let value = target - nums[i];
-        if(map.has(value)){
-            return [map.get(value) , i]
-        }
-        map.set(nums[i], i)
+  let map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    let value = target - nums[i];
+    if (map.has(value)) {
+      return [map.get(value), i];
     }
+    map.set(nums[i], i);
+  }
 };
 
 // Debounce debounce(fn,500)
