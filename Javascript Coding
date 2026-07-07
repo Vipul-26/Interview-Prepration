@@ -1,1 +1,26 @@
+// Debouncing Input Field
 
+<body>
+  <input id="search" type="text" placeholder="Search here" />
+  <script>
+    function debounce(fn, delay) {
+      let timer;
+      return function(...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          fn(...args);
+        }, delay);
+      }
+    }
+    const search = (value) => {
+      console.log(value);
+    };
+
+    const debouncedSearch = debounce(search, 500);
+
+    document.getElementById('search').addEventListener('input', (e) => {
+      debouncedSearch(e.target.value);
+    });
+    
+  </script>
+</body>
