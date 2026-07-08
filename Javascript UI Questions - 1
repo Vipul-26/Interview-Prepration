@@ -218,3 +218,82 @@ searchElement.addEventListener('input', (e) => {
   debouncedSearch(e.target.value);
 });
 
+DESIGN:
+
+[ START: Page Load ]
+         │
+         ▼
+ ┌──────────────────────────────────────────────┐
+ │ Initialize Global Variables                  │
+ │ (filteredProducts, currentPage, itemsPerPage)│
+ └──────────────────────┬───────────────────────┘
+                        │
+                        ▼
+ ┌──────────────────────────────────────────────┐
+ │ Execute fetchProducts() (Initial API Call)   │
+ └──────────────────────┬───────────────────────┘
+                        │
+                        ├──────────────────────────┐
+                 [ API Success ]            [ API Failure ]
+                        │                          │
+                        ▼                          ▼
+ ┌──────────────────────────────────────┐   ┌──────────────────────────────┐
+ │ 1. Populate 'filteredProducts'       │   │ Show error message in UI     │
+ │ 2. Extract unique categories         │   └──────────────────────────────┘
+ └──────────────────────┬───────────────┘
+                        │
+                        ▼
+ ┌──────────────────────────────────────┐
+ │ Setup UI Components                  │
+ │ 1. renderCategories()                │
+ │ 2. renderSortBy()                    │
+ └──────────────────────┬───────────────┘
+                        │
+                        ▼
+ ┌──────────────────────────────────────┐
+ │ Trigger Initial updateUI()           │
+ └──────────────────────┬───────────────┘
+                        │
+                        ▼
+ ┌────────────────────────────────────────────────────────────────────────┐
+ │                      THE CORE UPDATE LOOP (updateUI)                   │
+ │                                                                        │
+ │  1. getFilteredAndSortedProducts()                                     │
+ │     ├── Checks 'currentCategory' -> Filters list if needed             │
+ │     └── Checks 'currentSort'     -> Sorts (A-Z, Price, etc.)           │
+ │                                                                        │
+ │  2. Calculate Pagination Indices                                       │
+ │     ├── startIndex = (currentPage - 1) * 10                            │
+ │     └── endIndex   = startIndex + 10                                   │
+ │                                                                        │
+ │  3. renderProducts()                                                   │
+ │     └── Slices array and injects HTML into '#products' box             │
+ │                                                                        │
+ │  4. renderPaginationControl()                                          │
+ │     ├── Computes totalPages                                            │
+ │     └── Disables/Enables 'Prev' & 'Next' buttons                       │
+ └──────────────────────────────────────┬─────────────────────────────────┘
+                                        │
+                                        ▼
+   ┌────────────────────────────────────────────────────────────────────────┐
+   │                          USER INTERACTIONS                             │
+   └────────┬───────────────────────────┼───────────────────────────┬───────┘
+            │                           │                           │
+            ▼                           ▼                           ▼
+┌──────────────────────┐    ┌──────────────────────┐    ┌──────────────────────┐
+│  Category Dropdown   │    │    Sort Dropdown     │    │  Pagination Buttons  │
+│       Changed        │    │       Changed        │    │    (Prev / Next)     │
+└───────────┬──────────┘    └───────────┬──────────┘    └───────────┬──────────┘
+            │                           │                           │
+            ▼                           ▼                           ▼
+┌──────────────────────┐    ┌──────────────────────┐    ┌──────────────────────┐
+│ Update               │    │ Update               │    │ Increment or         │
+│ currentCategory var  │    │ currentSort var      │    │ decrement            │
+│                      │    │                      │    │ currentPage var      │
+└───────────┬──────────┘    └───────────┬──────────┘    └───────────┬──────────┘
+            │                           │                           │
+            └───────────────────────────┼───────────────────────────┘
+                                        │
+                                        ▼
+                         [ Re-run updateUI() Loop ]
+
