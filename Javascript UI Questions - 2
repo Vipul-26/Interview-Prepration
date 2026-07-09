@@ -1,1 +1,120 @@
+HTML:
 
+<label for="name">Name: </label>
+<input type="text" id="name" placeholder="Enter your name">
+<p class="errorText hidden" id="nameError">Name is required</p>
+<br />
+<br />
+<label for="email">Email: </label>
+<input type="email" id="email" placeholder="Enter your email">
+<p class="errorText hidden" id="emailError">Email is required</p>
+<br />
+<br />
+<label for="department">Department: </label>
+<select id="department">
+    <option value="IT">IT</option>
+    <option value="HR">HR</option>
+    <option value="Sales">Sales</option>
+</select>
+<br />
+<br />
+<label for="gender">Gender: </label>
+<input type="radio" name="gender" value="Male">Male
+<input type="radio" name="gender" value="Female">Female
+<br />
+<br />
+<label for="skills">Skills: </label>
+<input type="checkbox" name="skills" value="React">React
+<input type="checkbox" name="skills" value="Javascript">Javascript
+<input type="checkbox" name="skills" value="Css">Css
+<br />
+<br />
+<label for="experience">Experience: </label>
+<input type="number" id="experience" min="1" max="15">
+<br />
+<br />
+<button id="add-employee">Add Employee</button>
+<div id="employee-list"></div>
+
+CSS:
+
+.errorText {
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+#employee-list {
+  display: flex;
+  gap: 1rem;
+}
+
+.employee-item {
+  width: 200px;
+  border: 1px soldi red;
+  padding: 1rem;
+}
+
+JS:
+
+const addButton = document.getElementById('add-employee');
+const employeeList = document.getElementById('employee-list');
+let employees = [];
+
+addButton.addEventListener('click', () => {
+  const nameError = document.getElementById('nameError');
+  const emailError = document.getElementById('emailError');
+  nameError.style.display = 'none';
+  emailError.style.display = 'none';
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const department = document.getElementById('department').value;
+  const experience = document.getElementById('experience').value;
+
+  const genderChecked = document.querySelector('input[name="gender"]:checked');
+  const gender = genderChecked ? genderChecked.value : 'Not Specified';
+
+  const skillCheckboxes = document.querySelectorAll('input[name="skills"]:checked');
+  const skills = skillCheckboxes.length > 0 ? Array.from(skillCheckboxes).map(cb => cb.value) : 'No Skills Specified';
+
+  if (!name || !email) {
+    if (!name) {
+      nameError.style.display = 'block';
+    }
+    if (!email) {
+      emailError.style.display = 'block';
+    }
+    return;
+  }
+
+  employees.push({
+    name,
+    email,
+    department,
+    experience,
+    gender,
+    skills
+  });
+
+  employeeList.innerHTML = '';
+
+  employeeList.innerHTML = employees.map(employee => `
+    <div class="employee-item">
+      <h6>Name: ${employee.name}</h6>
+      <h6>Email: ${employee.email}</h6>
+      <h6>Deplartment: ${employee.department}</h6>
+      <h6>Gender: ${employee.gender}</h6>
+      <h6>Skills: ${employee.skills}</h6>
+      <h6>Experience: ${employee.experience}</h6>
+    </div>
+  `);
+
+  document.getElementById('name').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('department').value = 'IT';
+  document.getElementById('experience').value = '';
+  if (genderChecked) genderChecked.checked = false;
+  skillCheckboxes.forEach(cb => cb.checked = false);
+});
