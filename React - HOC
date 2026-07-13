@@ -13,3 +13,5 @@ const HOC = (WrapperComponent) => {
 export default HOC;
 
 const updatedFunctionality = HOC(MyComponent);
+
+A function takes an existing component and returns a new component with enhanced functionality.
