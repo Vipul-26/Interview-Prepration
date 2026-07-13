@@ -205,6 +205,30 @@ function customHook(str) {
   return str.split(" ").reverse().join(" ");
 }
 
+// Reverse words + strings without using reverse
+
+const myStr = 'Hello World'; // olleH dlroW
+
+const myFunction = (myString) => {
+    let newWord = '';
+    let newString = '';
+
+    for (let i = 0; i <= myString.length; i++) {
+        if (myString[i] === ' ' || i === myString.length) {
+            newString = newString + newWord;
+            if(myString[i] === ' ') {
+                newString = newWord + ' '
+            }
+            newWord = ''
+        } else {
+            newWord = myStr[i] + newWord
+        }
+    }
+    return newString;
+};
+
+console.log(myFunction(myStr));
+
 // Longest word ("I love JavaScript very much")
 
 function customHook(str) {
