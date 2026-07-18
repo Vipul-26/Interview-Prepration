@@ -1,3 +1,37 @@
+# Table of Contents
+
+1. What is OOP?
+2. Four Pillars of OOP
+3. Class vs Object
+4. Object Literal
+5. Constructor Function
+6. ES6 Class
+7. `this` Keyword
+8. Encapsulation
+9. Private Fields (`#`)
+10. Abstraction
+11. Inheritance
+12. `super()`
+13. Polymorphism
+14. Method Overriding
+15. Static Methods
+16. Getters & Setters
+17. Prototype
+18. Prototype Chain
+19. Class vs Constructor Function
+20. `Object.create()`
+21. `instanceof`
+22. `hasOwnProperty()`
+23. `Object.keys()`
+24. `Object.values()`
+25. `Object.entries()`
+26. `Object.freeze()`
+27. `Object.seal()`
+28. Composition vs Inheritance
+29. Frequently Asked Interview Questions
+30. Common Interview One-Liners
+31. 30-Second Revision Summary
+
 # What is OOP?
 
 Object-Oriented Programming is a programming paradigm that organizes code into **objects** containing:
