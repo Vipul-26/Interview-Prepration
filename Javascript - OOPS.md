@@ -188,7 +188,7 @@ Private fields start with **#**
 
 # Abstraction
 
-Hide implementation details.
+Abstraction is the OOP principle of hiding unnecessary implementation details and exposing only the essential functionality to the user.
 
 ```javascript
 class Payment {
@@ -216,57 +216,267 @@ No need to know internal logic.
 
 # Inheritance
 
-Child class inherits parent.
+## Definition
 
-```javascript
-class Animal {
+> **Inheritance is the OOP principle that allows a class (child/subclass) to inherit the properties and methods of another class (parent/superclass), enabling code reuse and extension.**
 
-   speak(){
-      console.log("Animal speaks");
-   }
-}
+---
 
-class Dog extends Animal {
+## Simple Definition
 
-   bark(){
-      console.log("Bark");
-   }
-}
+> **Inheritance allows one class to reuse the properties and methods of another class.**
 
-const dog = new Dog();
+---
 
-dog.speak();
-dog.bark();
+## Real-World Example
+
+A **Dog** is an **Animal**.
+
+Both have common behaviors like:
+
+- Eat
+- Sleep
+- Breathe
+
+A Dog also has its own behavior:
+
+- Bark
+
+Instead of rewriting the common methods, the Dog inherits them from Animal.
+
+```
+Animal
+ ├── eat()
+ ├── sleep()
+ └── breathe()
+
+      ▲
+      │ extends
+
+Dog
+ └── bark()
 ```
 
 ---
 
-# super()
-
-Calls parent constructor or method.
+## JavaScript Example
 
 ```javascript
-class Animal{
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
 
-   constructor(name){
-      this.name = name;
-   }
+  eat() {
+    console.log(`${this.name} is eating`);
+  }
 }
 
-class Dog extends Animal{
+class Dog extends Animal {
+  bark() {
+    console.log(`${this.name} is barking`);
+  }
+}
 
-   constructor(name){
-      super(name);
-   }
+const dog = new Dog("Bruno");
+
+dog.eat();   // Inherited
+dog.bark();  // Own method
+```
+
+**Output**
+
+```
+Bruno is eating
+Bruno is barking
+```
+
+---
+
+## Using super()
+
+`super()` calls the parent class constructor.
+
+```javascript
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+class Dog extends Animal {
+  constructor(name, breed) {
+    super(name);
+    this.breed = breed;
+  }
+}
+
+const dog = new Dog("Bruno", "Labrador");
+
+console.log(dog.name);
+console.log(dog.breed);
+```
+
+Without calling `super()`, JavaScript throws a **ReferenceError** because the parent constructor must initialize `this` before it can be used.
+
+---
+
+## Why do we use Inheritance?
+
+- Reuse existing code.
+- Avoid duplication.
+- Easily extend functionality.
+- Improve maintainability.
+- Model real-world relationships.
+
+---
+
+## Interview One-Liner
+
+> **Inheritance allows a child class to acquire the properties and methods of a parent class, promoting code reuse and extensibility.**
+
+---
+
+## Common Interview Questions
+
+### Q. Which keyword is used for inheritance?
+
+```javascript
+extends
+```
+
+Example:
+
+```javascript
+class Dog extends Animal {}
+```
+
+---
+
+### Q. What is `super()`?
+
+`super()` calls the parent class constructor or parent methods.
+
+Constructor example:
+
+```javascript
+super(name);
+```
+
+Method example:
+
+```javascript
+class Animal {
+  speak() {
+    console.log("Animal speaks");
+  }
+}
+
+class Dog extends Animal {
+  speak() {
+    super.speak();
+    console.log("Dog barks");
+  }
 }
 ```
 
-Without `super()`
+---
+
+### Q. Does JavaScript support multiple inheritance?
+
+**No.**
+
+A class can extend only one class.
+
+```javascript
+class A {}
+class B {}
+
+// ❌ Not allowed
+class C extends A, B {}
+```
+
+Instead, JavaScript commonly uses:
+
+- Composition
+- Mixins
+
+---
+
+## Inheritance vs Composition
+
+### Inheritance (IS-A relationship)
 
 ```
-ReferenceError
+Dog IS-A Animal
 ```
 
+```javascript
+class Dog extends Animal {}
+```
+
+---
+
+### Composition (HAS-A relationship)
+
+```
+Car HAS-A Engine
+```
+
+```javascript
+class Engine {}
+
+class Car {
+  constructor() {
+    this.engine = new Engine();
+  }
+}
+```
+
+Modern JavaScript applications generally prefer **Composition over Inheritance** because it creates more flexible and loosely coupled code.
+
+---
+
+## Easy Way to Remember
+
+- **Inheritance = "IS-A" relationship**
+- **Composition = "HAS-A" relationship**
+
+Examples:
+
+```
+Dog IS-A Animal ✅
+
+Car HAS-A Engine ✅
+
+Employee IS-A Person ✅
+
+Laptop HAS-A Keyboard ✅
+```
+
+---
+
+## JavaScript Behind the Scenes
+
+Although we use the `class` and `extends` syntax, JavaScript inheritance is actually implemented through the **prototype chain**.
+
+```javascript
+class Dog extends Animal {}
+```
+
+Internally, JavaScript links the prototypes so that if a property or method isn't found on `Dog`, it looks up the prototype chain to `Animal`.
+
+---
+
+## 30-Second Summary
+
+- Inheritance enables one class to reuse another class's properties and methods.
+- Implemented using the `extends` keyword.
+- `super()` calls the parent constructor or methods.
+- Promotes code reuse and extensibility.
+- JavaScript inheritance works through the **prototype chain**.
+- Supports **single inheritance** only.
+- Prefer **Composition over Inheritance** for complex applications.
 ---
 
 # Polymorphism
