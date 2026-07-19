@@ -400,16 +400,15 @@ var twoSum = function (nums, target) {
 <body style="height: 30000px;">
   <script>
     function throttle(fn, delay) {
-      let isWaiting = false;
+      let flag = true;
       return function(...args) {
-        if (isWaiting) return;
-        
-        fn(...args);
-        isWaiting = true;
-        
-        setTimeout(() => {
-          isWaiting = false;
-        }, delay);
+        if (flag) {
+          fn(...args);
+          flag = false;
+          setTimeout(() => {
+            flag = true;
+          }, delay);
+        }
       }
     }
 
