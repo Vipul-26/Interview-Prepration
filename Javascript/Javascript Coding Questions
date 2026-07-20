@@ -203,6 +203,56 @@ function customHook(str) {
   return str.split(" ").reverse().join(" ");
 }
 
+// Input - Hello World!, Output - Hollo Werld!
+
+const myInput = 'Hello World';
+
+const reverseVowels = (str) => {
+  const vowels = ['a','e','i','o','u'];
+  let vArr = [];
+  
+  for(let i in str) {
+      if(vowels.includes(str[i].toLowerCase())) {
+          vArr.push(str[i])
+      }
+  }
+  
+  vArr.reverse();
+  
+  let newString = '';
+  let index = 0;
+  
+  for(let i in str) {
+    if(vowels.includes(str[i].toLowerCase())) {
+          newString = newString + vArr[index++];
+      } else {
+          newString = newString + str[i]
+      }
+  }
+  
+  return newString;
+};
+
+console.log(reverseVowels(myInput));
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+
 // Reverse words + strings without using reverse
 
 const myStr = 'Hello World'; // olleH dlroW
