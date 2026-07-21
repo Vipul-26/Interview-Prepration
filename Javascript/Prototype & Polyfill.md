@@ -175,18 +175,3 @@ Instead of creating a new copy of a method for every object, all objects share a
 | Example: `Array.prototype.includes()` polyfill. | Example: `Person.prototype.greet()`. |
 
 ---
-
-# Summary
-
-### Polyfill
-
-- Adds missing JavaScript features.
-- Used for older browser compatibility.
-- Provides a fallback implementation.
-
-### Prototype
-
-- JavaScript's inheritance mechanism.
-- Objects inherit from prototypes.
-- Methods on the prototype are shared across all instances.
-- JavaScript is prototype-based.
