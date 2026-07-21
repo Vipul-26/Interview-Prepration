@@ -1,13 +1,23 @@
-// String to Array (.split(' ')) vs Array to String (.join(' '))
+# JavaScript Interview Snippets
 
-// in used for Objects traversal while of used for String & Array traversal
+A collection of common JavaScript logic, string/array/object problems, higher-order utilities, and polyfills.
 
-// Set works on Array & Strings and it has as .has() built-in method which return true or false
+---
 
-// Map is used to store dynamic key value pairs of any type.
+## Quick Concepts
 
-// Characters occurs most ('gh ghg dghd ghd ghg jhg djgh ygrytrh jrnret')
+- String to Array `.split(' ')` vs Array to String `.join(' ')`
+- `for...in` is used for **Objects** traversal, while `for...of` is used for **String & Array** traversal.
+- `Set` works on Arrays & Strings and has a built-in `.has()` method which returns `true` or `false`.
+- `Map` is used to store dynamic key-value pairs of any type or stores key-value pairs and supports all types of keys, unlike an object that only stores strings as keys.
 
+---
+
+## Characters occurs most
+
+Input: `'gh ghg dghd ghd ghg jhg djgh ygrytrh jrnret'`
+
+```javascript
 function customHook(str) {
   let myObj = {};
   let maxLengthChar = "";
@@ -23,9 +33,17 @@ function customHook(str) {
   }
   return maxLengthChar;
 }
+```
 
-// Words occurs most ('vvv kdjd vvv jhudur vvv yiold kdjd')
+**Output:** `"g"`
 
+---
+
+## Words occurs most
+
+Input: `'vvv kdjd vvv jhudur vvv yiold kdjd'`
+
+```javascript
 function customHook(str) {
   const updatedStr = str.split(" ");
   let myObj = {};
@@ -40,9 +58,17 @@ function customHook(str) {
   }
   return maxLengthWord;
 }
+```
 
-// First Non-Repeating Character ('aabbccde')
+**Output:** `"vvv"`
 
+---
+
+## First Non-Repeating Character
+
+Input: `'aabbccde'`
+
+```javascript
 function customHook(str) {
   let myObj = {};
   for (let i in str) {
@@ -54,9 +80,17 @@ function customHook(str) {
     }
   }
 }
+```
 
-// Remove Duplicate Words ('apple banana apple orange banana')
+**Output:** `"d"`
 
+---
+
+## Remove Duplicate Words
+
+Input: `'apple banana apple orange banana'`
+
+```javascript
 function customHook(str) {
   const array = str.split(" ");
   const updatedArray = [...new Set(array)];
@@ -74,9 +108,17 @@ function customHook(inputArray) {
   }
   return uniqueArray;
 }
+```
 
-// Find Duplicate Words ('apple banana apple orange banana')
+**Output:** `["apple", "banana", "orange"]`
 
+---
+
+## Find Duplicate Words
+
+Input: `'apple banana apple orange banana'`
+
+```javascript
 function customHook(str) {
   const array = str.split(" ");
   let duplicatesArray = [];
@@ -89,9 +131,17 @@ function customHook(str) {
   }
   return duplicatesArray;
 }
+```
 
-// Intersection ([1, 2, 3, 4, 5], [2, 4])
+**Output:** `["apple", "banana"]`
 
+---
+
+## Intersection
+
+Input: `[1, 2, 3, 4, 5], [2, 4]`
+
+```javascript
 function customHook(inputArray1, inputArray2) {
   const set = new Set(inputArray2);
   let intersectArray = [];
@@ -102,9 +152,17 @@ function customHook(inputArray1, inputArray2) {
   }
   return intersectArray;
 }
+```
 
-// Difference ([1, 2, 3, 4, 5], [2, 4])
+**Output:** `[2, 4]`
 
+---
+
+## Difference
+
+Input: `[1, 2, 3, 4, 5], [2, 4]`
+
+```javascript
 function customHook(inputArray1, inputArray2) {
   const set = new Set(inputArray2);
   let differenceArray = [];
@@ -115,9 +173,17 @@ function customHook(inputArray1, inputArray2) {
   }
   return differenceArray;
 }
+```
 
-// Group By Property (const users = [{ name: "A", dept: "IT" }, { name: "B", dept: "HR" }, { name: "C", dept: "IT" }];)
+**Output:** `[1, 3, 5]`
 
+---
+
+## Group By Property
+
+Input: `const users = [{ name: "A", dept: "IT" }, { name: "B", dept: "HR" }, { name: "C", dept: "IT" }];`
+
+```javascript
 function customHook(inputArray) {
   let myObj = {};
   for (const item of inputArray) {
@@ -129,9 +195,13 @@ function customHook(inputArray) {
   }
   return myObj;
 }
+```
 
-// Using Reduce
+**Output:** `{ IT: ["A", "C"], HR: ["B"] }`
 
+### Using Reduce
+
+```javascript
 function groupBy(users) {
   const groupedUsers = users.reduce((acc, item) => {
     acc[item.dept] = [...(acc[item.dept] || []), item.name];
@@ -140,9 +210,17 @@ function groupBy(users) {
 
   return groupedUsers;
 }
+```
 
-// Highest Salary Employee (const emp = [{ name: "A", salary: 1000 },{ name: "B", salary: 5000 },{ name: "C", salary: 3000 }];)
+**Output:** `{ IT: ["A", "C"], HR: ["B"] }`
 
+---
+
+## Highest Salary Employee
+
+Input: `const emp = [{ name: "A", salary: 1000 },{ name: "B", salary: 5000 },{ name: "C", salary: 3000 }];`
+
+```javascript
 function customHook(inputArray) {
   let highestSalary = 0;
   let highestSalaryObject;
@@ -154,9 +232,13 @@ function customHook(inputArray) {
   }
   return highestSalaryObject;
 }
+```
 
-// Reduce Version
+**Output:** `{ name: "B", salary: 5000 }`
 
+### Reduce Version
+
+```javascript
 function customHook(inputArray) {
   const maxSalaryObj = inputArray.reduce((max, item) => {
     return item.salary > max.salary ? item : max;
@@ -164,17 +246,33 @@ function customHook(inputArray) {
 
   return maxSalaryObj;
 }
+```
 
-// Sum of Salary (const emp = [{ salary: 1000 },{ salary: 5000 },{ salary: 3000 }];)
+**Output:** `{ name: "B", salary: 5000 }`
 
+---
+
+## Sum of Salary
+
+Input: `const emp = [{ salary: 1000 },{ salary: 5000 },{ salary: 3000 }];`
+
+```javascript
 function customHook(inputArray) {
   return inputArray.reduce((acc, item) => {
     return item.salary + acc;
   }, 0);
 }
+```
 
-// Merge Objects (obj1={name:"Vipul"}, obj2={city:"Pune"})
+**Output:** `9000`
 
+---
+
+## Merge Objects
+
+Input: `obj1={name:"Vipul"}, obj2={city:"Pune"}`
+
+```javascript
 function customHook(obj1, obj2) {
   const mergedObj = {
     ...obj1,
@@ -182,9 +280,17 @@ function customHook(obj1, obj2) {
   };
   return mergedObj;
 }
+```
 
-// Flatten Array ([1,[2,[3,[4]]]])
+**Output:** `{ name: "Vipul", city: "Pune" }`
 
+---
+
+## Flatten Array
+
+Input: `[1,[2,[3,[4]]]]`
+
+```javascript
 function flattenArray(inputArray) {
   let flattenedArray = [];
   for (let i of inputArray) {
@@ -196,15 +302,31 @@ function flattenArray(inputArray) {
   }
   return flattenedArray;
 }
+```
 
-// Reverse Words ('I love react')
+**Output:** `[1, 2, 3, 4]`
 
+---
+
+## Reverse Words
+
+Input: `'I love react'`
+
+```javascript
 function customHook(str) {
   return str.split(" ").reverse().join(" ");
 }
+```
 
-// Input - Hello World!, Output - Hollo Werld!
+**Output:** `"react love I"`
 
+---
+
+## Reverse Vowels
+
+Input: `Hello World!` → Output: `Hollo Werld!`
+
+```javascript
 const myInput = 'Hello World';
 
 const reverseVowels = (str) => {
@@ -234,9 +356,17 @@ const reverseVowels = (str) => {
 };
 
 console.log(reverseVowels(myInput));
+```
 
-// Reverse words + strings without using reverse
+**Output:** `Hollo Werld`
 
+---
+
+## Reverse words + strings without using reverse
+
+Input: `Hello World` → `olleH dlroW`
+
+```javascript
 const myStr = 'Hello World'; // olleH dlroW
 
 const myFunction = (myString) => {
@@ -258,9 +388,17 @@ const myFunction = (myString) => {
 };
 
 console.log(myFunction(myStr));
+```
 
-// Longest word ("I love JavaScript very much")
+**Output:** `olleH dlroW`
 
+---
+
+## Longest word
+
+Input: `"I love JavaScript very much"`
+
+```javascript
 function customHook(str) {
   let newStrArray = str.split(" ");
   let maxLength = newStrArray[0].length;
@@ -273,13 +411,27 @@ function customHook(str) {
   }
   return maxLengthWord;
 }
+```
 
-// Sort By Age
+**Output:** `"JavaScript"`
 
+---
+
+## Sort By Age
+
+```javascript
 users.sort((a, b) => a.age - b.age);
+```
 
-// Deep Copy (const obj = {name: "Vipul",address: {city: "Pune"}};)
+**Output:** array sorted ascending by `age` (e.g. `[{age: 22}, {age: 25}, {age: 30}]`)
 
+---
+
+## Deep Copy
+
+Input: `const obj = {name: "Vipul", address: {city: "Pune"}};`
+
+```javascript
 function deepCopy(obj) {
   let newObj = {};
   for (let key in obj) {
@@ -291,9 +443,17 @@ function deepCopy(obj) {
   }
   return newObj;
 }
+```
 
-// Deep Freeze (const obj = {name: "Vipul",address: {city: "Pune"}};)
+**Output:** `{ name: "Vipul", address: { city: "Pune" } }` (a new independent copy — nested objects are cloned, not shared)
 
+---
+
+## Deep Freeze
+
+Input: `const obj = {name: "Vipul", address: {city: "Pune"}};`
+
+```javascript
 function deepFreeze(obj) {
   for (let key in obj) {
     if (typeof obj[key] === "object" && obj[key] !== null) {
@@ -303,9 +463,17 @@ function deepFreeze(obj) {
   Object.freeze(obj);
   return obj;
 }
+```
 
-// Deep Equal (const obj1 = {name: "Vipul",address: {city: "Pune"}}; const obj2 = {name: "Vipul",address: {city: "Pune"}};)
+**Output:** the same object, deeply frozen — any mutation (including nested `obj.address.city = "X"`) is silently ignored (throws in strict mode)
 
+---
+
+## Deep Equal
+
+Input: `const obj1 = {name: "Vipul", address: {city: "Pune"}}; const obj2 = {name: "Vipul", address: {city: "Pune"}};`
+
+```javascript
 function deepEqual(obj1, obj2) {
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
@@ -326,9 +494,17 @@ function deepEqual(obj1, obj2) {
   }
   return true;
 }
+```
 
-// Flatten Object (const obj = {name: "Vipul", address: {city: "Pune"}};)
+**Output:** `true`
 
+---
+
+## Flatten Object
+
+Input: `const obj = {name: "Vipul", address: {city: "Pune"}};`
+
+```javascript
 function flattenObject(obj, parentKey = "", res = {}) {
   for (let key in obj) {
     let propName = parentKey ? `${parentKey}.${key}` : key;
@@ -344,9 +520,17 @@ function flattenObject(obj, parentKey = "", res = {}) {
   }
   return res;
 }
+```
 
-// Implement get (get(obj,'a.b.c'))
+**Output:** `{ name: "Vipul", "address.city": "Pune" }`
 
+---
+
+## Implement get
+
+Usage: `get(obj,'a.b.c')`
+
+```javascript
 function implementGet(obj, path) {
   const splittedPath = path.split(".");
   let currentValue;
@@ -355,9 +539,17 @@ function implementGet(obj, path) {
   }
   return currentValue;
 }
+```
 
-// Implement set (set(obj,'a.b.c',100))
+**Output:** for `get({ a: { b: { c: 42 } } }, 'a.b.c')` → `42`
 
+---
+
+## Implement set
+
+Usage: `set(obj,'a.b.c',100)`
+
+```javascript
 function implementSet(obj, path, value) {
   const splittedPath = path.split(".");
   let currentValue = obj;
@@ -371,9 +563,17 @@ function implementSet(obj, path, value) {
   }
   return obj;
 }
+```
 
-// Two Sum ([2, 6, 7, 8], 9))
+**Output:** for `set({}, 'a.b.c', 100)` → `{ a: { b: { c: 100 } } }`
 
+---
+
+## Two Sum
+
+Input: `[2, 6, 7, 8], 9`
+
+```javascript
 var twoSum = function (nums, target) {
   let index = [];
   for (let i = 0; i < nums.length; i++) {
@@ -385,9 +585,13 @@ var twoSum = function (nums, target) {
   }
   return index;
 };
+```
 
-// Using Map (key: value pair) (stores all types of key unlike object that just stores string as key)
+**Output:** `[0, 2]` (nums[0] + nums[2] = 2 + 7 = 9)
 
+### Using Map
+
+```javascript
 var twoSum = function (nums, target) {
   let map = new Map();
   for (let i = 0; i < nums.length; i++) {
@@ -398,9 +602,15 @@ var twoSum = function (nums, target) {
     map.set(nums[i], i);
   }
 };
+```
 
-// Debouncing Input Field
+**Output:** `[0, 2]`
 
+---
+
+## Debouncing Input Field
+
+```html
 <body>
   <input id="search" type="text" placeholder="Search here" />
   <script>
@@ -424,9 +634,15 @@ var twoSum = function (nums, target) {
     });
   </script>
 </body>
+```
 
-// Throttling Window Scroll
+**Output:** logs the input value only once the user stops typing for 500ms (e.g. typing "iphone" quickly logs `iphone` a single time)
 
+---
+
+## Throttling Window Scroll
+
+```html
 <body style="height: 30000px;">
   <script>
     function throttle(fn, delay) {
@@ -451,9 +667,17 @@ var twoSum = function (nums, target) {
     window.addEventListener('scroll', throttledScroll);
   </script>
 </body>
+```
 
-// Memoize memoize(fn)
+**Output:** logs `window.scrollY` at most once every 3000ms while scrolling (e.g. `0`, `1450`, `3200`, ... one value per 3s)
 
+---
+
+## Memoize
+
+Usage: `memoize(fn)`
+
+```javascript
 function memoize(fn) {
   const cache = {};
   return function (x) {
@@ -472,9 +696,20 @@ function square(x) {
 const memoizedValue = memoize(square);
 console.log(memoizedValue(5));
 console.log(memoizedValue(5));
+```
 
-// Polyfill for map
+**Output:**
 
+```text
+25
+25   // second call returns the cached result without recomputing
+```
+
+---
+
+## Polyfill for map
+
+```javascript
 Array.prototype.map = function (callback) {
   const result = [];
   for (let i = 0; i < this.length; i++) {
@@ -482,9 +717,15 @@ Array.prototype.map = function (callback) {
   }
   return result;
 };
+```
 
-// Polyfill for filter
+**Output:** for `[1, 2, 3].map(x => x * 2)` → `[2, 4, 6]`
 
+---
+
+## Polyfill for filter
+
+```javascript
 Array.prototype.filter = function (callback) {
   const result = [];
   for (let i = 0; i < this.length; i++) {
@@ -494,9 +735,15 @@ Array.prototype.filter = function (callback) {
   }
   return result;
 };
+```
 
-// Polyfill for reduce
+**Output:** for `[1, 2, 3, 4].filter(x => x % 2 === 0)` → `[2, 4]`
 
+---
+
+## Polyfill for reduce
+
+```javascript
 Array.prototype.reduce = function (callback, initialValue) {
   let accumulator = initialValue;
   let startIndex = 0;
@@ -509,9 +756,15 @@ Array.prototype.reduce = function (callback, initialValue) {
   }
   return accumulator;
 };
+```
 
-// Polyfill for call
+**Output:** for `[1, 2, 3, 4].reduce((acc, x) => acc + x, 0)` → `10`
 
+---
+
+## Polyfill for call
+
+```javascript
 Function.prototype.call = function (context, ...args) {
     context = context || globalThis;
     const fn = Symbol();
@@ -520,9 +773,15 @@ Function.prototype.call = function (context, ...args) {
     delete context[fn];
     return result;
 };
+```
 
-// Polyfill for apply
+**Output:** for `function greet(city){ return this.name + " from " + city; }` → `greet.call({name:"Vipul"}, "Pune")` → `"Vipul from Pune"`
 
+---
+
+## Polyfill for apply
+
+```javascript
 Function.prototype.apply = function (context, args = []) {
     context = context || globalThis;
     const fn = Symbol();
@@ -531,12 +790,21 @@ Function.prototype.apply = function (context, args = []) {
     delete context[fn];
     return result;
 };
+```
 
-// Polyfill for bind
+**Output:** for `greet.apply({name:"Vipul"}, ["Pune"])` → `"Vipul from Pune"`
 
+---
+
+## Polyfill for bind
+
+```javascript
 Function.prototype.bind = function (context, ...args1) {
     const fn = this;
     return function (...args2) {
         return fn.apply(context, [...args1, ...args2]);
     };
 };
+```
+
+**Output:** for `const bound = greet.bind({name:"Vipul"}); bound("Pune")` → `"Vipul from Pune"`
