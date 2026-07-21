@@ -1,5 +1,12 @@
-HTML:
+# Employee Form (Add Employee with Validation)
 
+A vanilla JavaScript form that captures employee details (name, email, department, gender, skills, experience), validates required fields, and renders the list of added employees.
+
+---
+
+## HTML
+
+```html
 <label for="name">Name: </label>
 <input type="text" id="name" placeholder="Enter your name">
 <p class="errorText hidden" id="nameError">Name is required</p>
@@ -35,9 +42,13 @@ HTML:
 <br />
 <button id="add-employee">Add Employee</button>
 <div id="employee-list"></div>
+```
 
-CSS:
+---
 
+## CSS
+
+```css
 .errorText {
   color: red;
 }
@@ -56,9 +67,13 @@ CSS:
   border: 1px soldi red;
   padding: 1rem;
 }
+```
 
-JS:
+---
 
+## JavaScript
+
+```javascript
 const addButton = document.getElementById('add-employee');
 const employeeList = document.getElementById('employee-list');
 let employees = [];
@@ -118,3 +133,4 @@ addButton.addEventListener('click', () => {
   if (genderChecked) genderChecked.checked = false;
   skillCheckboxes.forEach(cb => cb.checked = false);
 });
+```
